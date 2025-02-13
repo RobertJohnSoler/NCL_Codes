@@ -1,6 +1,8 @@
 from datetime import datetime
 
 logs = []
+converted_logs = []
+total_bytes = 0
 
 def hex_to_ip(hex_input):
     """
@@ -37,5 +39,17 @@ with open("sky.log", "w") as outfile:
         timestamp = int(l[2], 16)
         time = datetime.fromtimestamp(timestamp)
         bytes_transferred = int(l[3], 16)
+        total_bytes = total_bytes + bytes_transferred
         # print(src_ip, dst_ip, time, bytes_transferred)
+        converted_logs.append([src_ip, dst_ip, time, bytes_transferred])
         outfile.write(f"{src_ip} {dst_ip} {time} {bytes_transferred} \n")
+
+print(total_bytes)
+
+ip_data = {}
+for l in converted_logs:
+    if l[0] not in ip_data:
+        ip_data[l[0]] = l[3]
+    elif l[0] in ip_data:
+        ip_data[l[0]] = ip_data[l[0]] + l[3]
+print(ip_data)
