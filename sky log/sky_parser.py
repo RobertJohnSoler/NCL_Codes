@@ -53,3 +53,12 @@ for l in converted_logs:
     elif l[0] in ip_data:
         ip_data[l[0]] = ip_data[l[0]] + l[3]
 print(ip_data)
+
+date_data = {}
+for l in converted_logs:
+    date = l[2].strftime("%Y-%m-%d")
+    if date not in date_data:
+        date_data[date] = l[3]
+    elif date in date_data:
+        date_data[date] = date_data[date] + l[3]
+print(date_data)
