@@ -62,6 +62,7 @@ void check_flag(const char *input) {
     }
 
     transformed_text[strlen(target_string)] = '\0';
+    printf("%s \n", transformed_text);
 
     if (strcmp(transformed_text, target_string) == 0) {
         printf("[+] Correct! You know math!\n");
